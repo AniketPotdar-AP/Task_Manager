@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Task Manager</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="accent" routerLink="/create-task">
+      Create Task
+    </button>
+    <button mat-icon-button class="example-icon" (click)="logout()" aria-label="Example icon-button with menu icon">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <div class="header">
+        <h1>My Tasks</h1>
+      </div>
+      <ng-container *ngFor="let tasks of task">
+        <mat-card class="example-card">
+          <mat-card-content>
+            <mat-card-header>
+              <mat-card-title>{{ tasks.title }}</mat-card-title>
+              <mat-card-subtitle><span>Due Date : </span>{{ tasks.due_Date.slice(0, 10) }}</mat-card-subtitle>
+              <mat-card-subtitle><span>Description : </span>{{ tasks.description }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" [routerLink]="['../task-details/' + tasks?._id]">
+                Details
+              </button>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
