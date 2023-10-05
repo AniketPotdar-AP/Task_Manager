@@ -28,7 +28,7 @@ export class TaskDetailsComponent implements OnInit {
     this.taskForm = this.formBuilder.group({
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      due_Date: new FormControl('', [Validators.required]),
+      dueDate: new FormControl('', [Validators.required]),
     });
   }
 
@@ -42,7 +42,7 @@ export class TaskDetailsComponent implements OnInit {
       this.taskForm.patchValue({
         title: this.data?.title,
         description: this.data?.description,
-        due_Date: this.data?.due_Date,
+        dueDate: this.data?.dueDate,
       });
     });
   }
@@ -56,7 +56,7 @@ export class TaskDetailsComponent implements OnInit {
       this.id,
       this.taskForm.value.title,
       this.taskForm.value.description,
-      this.taskForm.value.due_Date
+      this.taskForm.value.dueDate
     );
   }
 

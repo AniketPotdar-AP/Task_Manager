@@ -1,54 +1,49 @@
-import { Component } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TaskService } from '../services/task.service';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.css'],
 })
-export class CreateTaskComponent {
-  taskForm!: FormGroup;
-  salaryService: any;
+export class CreateTaskComponent implements OnInit {
+  taskForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private taskService: TaskService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.taskForm = this.formBuilder.group({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      due_Date: new FormControl('', [Validators.required]),
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      dueDate: ['', Validators.required],
     });
   }
+
+  ngOnInit(): void { }
 
   /*=======================================================
                      Create Task
   =======================================================*/
 
-  createTask(taskForm: FormGroup) {
-    if (taskForm.invalid) {
+  createTask() {
+    if (this.taskForm.invalid) {
       return;
     }
-    this.taskService.createTask(
-      taskForm.value.title,
-      taskForm.value.description,
-      this.taskForm.value.due_Date
-    );
 
-    if (this.taskService.createTask!) {
-      taskForm.reset();
-      Object.keys(taskForm.controls).forEach((key) => {
-        taskForm.controls[key].setErrors(null);
-      });
-    }
+    const { title, description, dueDate } = this.taskForm.value;
+
+    this.taskService.createTask(title, description, dueDate).subscribe(() => {
+      this.router.navigateByUrl('/home');
+      this.taskForm.reset();
+      this.taskForm.markAsPristine();
+      this.taskForm.markAsUntouched();
+    });
   }
 
   get f() {
@@ -58,6 +53,4 @@ export class CreateTaskComponent {
   logout() {
     this.authService.logout();
   }
-
-  ngOnInit(): void { }
 }

@@ -31,22 +31,23 @@
           <input matInput formControlName="description" />
           <mat-icon matSuffix>description</mat-icon>
         </mat-form-field>
-        <div *ngIf="(f['description']['touched'] || f['description']['dirty']) && f['description'].errors" class="error">
+        <div *ngIf="(f['description']['touched'] || f['description']['dirty']) && f['description'].errors"
+          class="error">
           <small *ngIf="f['description'].errors['required']">Description is Required!</small>
         </div>
 
         <mat-form-field appearance="outline">
           <mat-label>Choose Due Date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="due_Date" />
+          <input matInput [matDatepicker]="picker" formControlName="dueDate" />
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <div *ngIf="(f['due_Date']['touched'] || f['due_Date']['dirty']) && f['due_Date'].errors" class="error">
-          <small *ngIf="f['due_Date'].errors['required']">Due Date is Required!</small>
+        <div *ngIf="(f['dueDate']['touched'] || f['dueDate']['dirty']) && f['dueDate'].errors" class="error">
+          <small *ngIf="f['dueDate'].errors['required']">Due Date is Required!</small>
         </div>
 
         <div class="button">
-          <button mat-raised-button color="primary" [disabled]="!taskForm.valid" (click)="createTask(taskForm)">
+          <button mat-raised-button color="primary" [disabled]="!taskForm.valid" (click)="createTask()">
             Create Task
           </button>
         </div>

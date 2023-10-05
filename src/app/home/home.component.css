@@ -10,12 +10,12 @@ mat-sidenav {
 }
 
 .content {
-  height: 100%;
   border-radius: 10px;
   margin: 16px;
   margin-left: 32px;
   padding: 10px;
   font-size: 1rem;
+  min-height: 80vh;
 }
 
 .header {
@@ -27,11 +27,6 @@ mat-sidenav {
   max-width: 300px;
   display: inline-flex;
   margin: 20px 20px;
-}
-
-.example-header-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
 }
 
 mat-card-content {
